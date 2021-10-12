@@ -13,7 +13,7 @@ class TasksController < ApplicationController
 
     if task.save
 
-      render status: :ok, json: { notice: t("successfully_created") }
+      render status: :ok, json: { notice: t("successfully_created", entity: "Task") }
 
     else
 
