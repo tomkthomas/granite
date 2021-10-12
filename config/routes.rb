@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :tasks, except: %i[new edit], param: :slug
+  resources :tasks, except: %i[new edit], param: :slug, defaults: { format: "json" }
   resources :users, only: :index
 
   root "home#index"
