@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    render status: :ok, json: { task: @task }
+    render status: :ok, json: { task: @task, assigned_user: @task.assigned_user }
   end
 
   def update
@@ -66,6 +66,6 @@ class TasksController < ApplicationController
   end
 
     def task_params
-      params.require(:task).permit(:title)
+      params.require(:task).permit(:title, :assigned_user_id)
     end
 end

@@ -1,14 +1,33 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
-  # validates :title, presence: true
+  belongs_to :assigned_user, foreign_key: "assigned_user_id", class_name: "User"
+  before_validation :set_title, if: :title_not_present
+  before_validation :print_set_title
   validates :title, presence: true, length: { maximum: 50 }
   validates :slug, uniqueness: true
   validate :slug_not_changed
 
   before_create :set_slug
+  # before_save :change_title
 
   private
+
+    def set_title
+      self.title = "Pay electricity bill"
+    end
+
+    def print_set_title
+      puts self.title
+    end
+
+    def title_not_present
+      self.title.blank?
+    end
+
+    def change_title
+      self.title = "Pay electricity & TV bill"
+    end
 
     def set_slug
       title_slug = title.parameterize
